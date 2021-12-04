@@ -23,17 +23,21 @@ const userSchema = new mongoose.Schema({
     state: {
         type: Number,
         default: 0 // 0启用，1禁止
+    },
+    isLogin: {
+        type: Number,
+        default: 0 // 0未登录，1已登录
     }
-
 });
 
 //创建集合
 const User = mongoose.model('User', userSchema);
 // User.create({
-//     username: 'admin',
+//     username: 'lfy',
 //     password: '123456',
-//     role: "超级管理员",
-//     state: 0
+//     role: "高级管理员",
+//     state: 0,
+//     isLogin: 0
 // }).then(() => {
 //     console.log('用户创建成功');
 // }).catch(() => {
