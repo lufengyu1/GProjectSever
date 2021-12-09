@@ -4,6 +4,9 @@ const { Menu } = require('../model/menu');
 menu.get('/', async(req, res) => {
     let menu = await Menu.find({});
     if (!menu) res.send({ res: null, meta: { status: 404, des: "数据库出错" } });
-    res.send({ res: menu, meta: { status: 200, des: "success" } });
+    res.send({
+        res: menu,
+        meta: { status: 200, des: "success" }
+    });
 })
-module.exports = menu;
+module.exports = menu

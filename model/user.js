@@ -16,13 +16,19 @@ const userSchema = new mongoose.Schema({
         minlength: 6,
         maxlength: 18
     },
+    mail: {
+        type: String,
+    },
+    phone: {
+        type: Number
+    },
     role: {
         type: String,
         required: true,
     },
     state: {
-        type: Number,
-        default: 0 // 0启用，1禁止
+        type: Boolean,
+        default: true // true启用，false禁止
     },
     isLogin: {
         type: Number,
@@ -32,13 +38,32 @@ const userSchema = new mongoose.Schema({
 
 //创建集合
 const User = mongoose.model('User', userSchema);
-// User.create({
+// 添加数据
+// User.create([{
+//     username: 'admin',
+//     password: '123456',
+//     mail: '123456@qq.com',
+//     phone: 12345678912,
+//     role: "超级管理员",
+//     state: true,
+//     isLogin: 0
+// }, {
 //     username: 'lfy',
 //     password: '123456',
+//     mail: '123456@qq.com',
+//     phone: 12345678912,
 //     role: "高级管理员",
-//     state: 0,
+//     state: true,
 //     isLogin: 0
-// }).then(() => {
+// }, {
+//     username: 'zcy',
+//     password: '123456',
+//     mail: '123456@qq.com',
+//     phone: 12345678912,
+//     role: "高级管理员",
+//     state: true,
+//     isLogin: 0
+// }]).then(() => {
 //     console.log('用户创建成功');
 // }).catch(() => {
 //     console.log('用户创建失败');
