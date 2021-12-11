@@ -46,7 +46,35 @@ user.get('/users', async(req, res) => {
 // 更新用户信息接口
 user.put('/update', async(req, res) => {
     let result = await User.updateOne({ _id: req.body.id }, req.body.pa);
-    if (!result.acknowledged || !result.modifiedCount) return res.send({ res: null, meta: { state: 404, des: "更新失败" } });
-    return res.send({ res: null, meta: { state: 200, des: "更新成功" } })
+    if (!result.acknowledged || !result.modifiedCount) return res.send({ res: null, meta: { status: 404, des: "更新失败" } });
+    return res.send({ res: null, meta: { status: 200, des: "更新成功" } })
+})
+
+// 添加用户接口
+user.put('/add', async(req, res) => {
+    let exist = await User.findOne({ username: req.body.username });
+    if (exist) {
+        res.send({ res: null, meta: { status: 404, des: "用户名已存在" } });
+    } else {
+        let result = await User.insertMany(req.body);
+        if (result) {
+            res.send({ res: null, meta: { status: 200, des: "success" } });
+        }
+    }
+});
+
+// 根据id返回用户信息接口
+user.get('/userinfo', async(req, res) => {
+    let result = await User.findOne(req.query);
+    if (!result) return res.send({ res: null, meta: { status: 404, des: "未查询到该用户" } });
+    return res.send({ res: result, meta: { status: 200, des: "success" } });
+})
+
+// 根据id删除用户
+user.delete('/delete', async(req, res) => {
+    let result1 = await User.findOne({ _id: req.query._id })
+    if (!result1) return res.send({ result: null, meta: { status: 404, des: "该用户不存在" } });
+    let result2 = await User.deleteOne({ _id: req.query._id });
+    if (result2.deletedCount > 0) return res.send({ result: null, meta: { status: 200, des: "success" } });
 })
 module.exports = user;

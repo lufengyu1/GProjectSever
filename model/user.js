@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
-        minlength: 5,
+        minlength: 3,
         maxlength: 12
     },
     password: {
@@ -16,11 +16,11 @@ const userSchema = new mongoose.Schema({
         minlength: 6,
         maxlength: 18
     },
-    mail: {
+    email: {
         type: String,
     },
     phone: {
-        type: Number
+        type: String,
     },
     role: {
         type: String,
@@ -42,7 +42,7 @@ const User = mongoose.model('User', userSchema);
 // User.create([{
 //     username: 'admin',
 //     password: '123456',
-//     mail: '123456@qq.com',
+//     email: '123456@qq.com',
 //     phone: 12345678912,
 //     role: "超级管理员",
 //     state: true,
@@ -50,7 +50,7 @@ const User = mongoose.model('User', userSchema);
 // }, {
 //     username: 'lfy',
 //     password: '123456',
-//     mail: '123456@qq.com',
+//     email: '123456@qq.com',
 //     phone: 12345678912,
 //     role: "高级管理员",
 //     state: true,
@@ -58,7 +58,7 @@ const User = mongoose.model('User', userSchema);
 // }, {
 //     username: 'zcy',
 //     password: '123456',
-//     mail: '123456@qq.com',
+//     email: '123456@qq.com',
 //     phone: 12345678912,
 //     role: "高级管理员",
 //     state: true,
