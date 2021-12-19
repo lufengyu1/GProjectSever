@@ -9,6 +9,8 @@ app.use(bodyParser.json());
 // 路由模块化
 const user = require('./route/user');
 const menu = require('./route/menu');
+const right = require('./route/right');
+const role = require('./route/role');
 // 解决跨域
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -19,7 +21,9 @@ app.use(function(req, res, next) {
 // 设置路由
 app.use('/user', user);
 app.use('/menu', menu);
+app.use('/right', right);
+app.use('/role', role);
 
 app.listen(3000, () => {
     console.log('服务器已启动');
-})
+});

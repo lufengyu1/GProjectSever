@@ -54,7 +54,7 @@ user.put('/update', async(req, res) => {
 user.put('/add', async(req, res) => {
     let exist = await User.findOne({ username: req.body.username });
     if (exist) {
-        res.send({ res: null, meta: { status: 404, des: "用户名已存在" } });
+        return res.send({ res: null, meta: { status: 404, des: "用户名已存在" } });
     } else {
         let result = await User.insertMany(req.body);
         if (result) {
